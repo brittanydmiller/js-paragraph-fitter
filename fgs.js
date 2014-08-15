@@ -76,7 +76,7 @@ ParagraphFitterView.prototype = {
     console.log("--------------------")
     console.log("Paragraph Pixel Width: " + parPxWidth);
     console.log("Character Pixel Width: " + charPxWidth);
-    //console.log("Desired Character per Line: " + desiredInchesWide / characterWidth);
+    console.log("Desired Character per Line: " + desiredInchesWide / characterWidth);
     //can't guarantee width if no line ever makes it to the longest length, due to needing to wrap.
     console.log("Paragraph Pixel Width divided by Character Pixel Width (Actual number of characters per line): " + parPxWidth/charPxWidth);
     console.log("Desired Paragraph Width (in inches): " + desiredInchesWide);
