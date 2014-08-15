@@ -18,10 +18,38 @@ ParagraphFitter.prototype = {
     var currentIndex = 0;
     var lineEndIndex = currentIndex + this.lineCharCount - 1;
     //iterate throught the entire charArray  
-    //findNaturalBreaks
-    //detectSpacesBackThroughTheLine
-    //replaceWithBreak
-    //reset curretnIndex & lineEndIndex
+    for (j = 0; j < charArray.length; j++){ 
+      console.log(charArray.length)
+      //findNaturalBreaks
+      if (charArray[lineEndIndex] == " ") {
+        this.replaceWithBreak(charArray, lineEndIndex);
+        currentIndex = lineEndIndex + 1;
+        lineEndIndex = currentIndex + this.lineCharCount - 1;
+      } else {
+        //detectSpacesBackThroughTheLine
+        var shrinkingEndIndex = lineEndIndex
+        var space_discovered = false;
+        for (i = 0; i < this.lineCharCount; i++){
+          shrinkingEndIndex = shrinkingEndIndex - 1
+          if (charArray[shrinkingEndIndex] == " ") {
+            this.replaceWithBreak(charArray, shrinkingEndIndex)
+            space_discovered = true;
+            console.log(charArray.join(""))
+            break;
+          }
+        }
+      //if you get all the way back to a previously replaced \n (i.e. no spaces in line)
+        // if (space_discovered == false) {
+        //   charArray.splice(lineEndIndex - 1, 0, "-");
+        //   currentIndex = lineEndIndex + 1;
+        //   lineEndIndex = currentIndex + this.lineCharCount - 1;
+        //   space_discovered = true;
+        // } else { 
+          currentIndex = lineEndIndex + 1;
+          lineEndIndex = currentIndex + this.lineCharCount - 1;
+        // }
+      }   
+    }
     this.splitParagraph = charArray.join("");
     console.log(this.splitParagraph)
   },
