@@ -62,13 +62,11 @@ ParagraphFitter.prototype = {
 function ParagraphFitterView(selectors) {
   this.paragraphSelector = selectors.paragraph;
   this.spanCharSelector = selectors.spanChar;
-  this.inchesSelector = selectors.inches;
 };
 
 ParagraphFitterView.prototype = {
   printColumn: function(desiredInchesWide, fittedParagraph){
     console.log(fittedParagraph);
-    document.getElementById(this.inchesSelector).innerText = desiredInchesWide;
     document.getElementById(this.paragraphSelector).innerText = fittedParagraph;
   }, 
   reportMetrics: function(characterWidth, desiredInchesWide){
@@ -87,7 +85,7 @@ ParagraphFitterView.prototype = {
 }
 
 window.onload = function(){
-  var selectors = {paragraph:"container", spanChar:"char-example", inches:"inches"};
+  var selectors = {paragraph:"container", spanChar:"char-example"};
   var paragraphFitterView = new ParagraphFitterView(selectors);
   var paragraphFitter = new ParagraphFitter(paragraphFitterView);
   var widthInInches = 10;
