@@ -7,10 +7,8 @@ ParagraphFitter.prototype = {
   fitToWidth: function(desiredInchesWide, inputParagraph){
     this.insertBreaks(inputParagraph, desiredInchesWide); 
     this.view.printColumn(desiredInchesWide, this.splitParagraph);
-    this.view.reportMetrics();  
-  },
-  determineLineCharCount: function(desiredInchesWide){
-    return lineCharCount = desiredInchesWide / this.characterWidth;
+    this.view.reportMetrics(this.characterWidth);  
+    //handle input errors
   },
   insertBreaks: function(inputParagraph, desiredInchesWide){
     var charArray = inputParagraph.split("");
