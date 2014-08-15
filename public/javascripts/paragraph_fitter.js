@@ -22,27 +22,30 @@ ParagraphFitter.prototype = {
     var totalChars = charArray.length
     if (lineStartIndex + lineCharCount < totalChars){
       lineEndIndex = lineStartIndex + lineCharCount;
-      this.findBreakingSpace(charArray, lineCharCount, lineEndIndex);
+      this.crawlBackTilSpace(charArray, lineCharCount, lineEndIndex);
     }
   },
-  findBreakingSpace: function(charArray, lineCharCount, lineEndIndex){
+  crawlBackTilSpace: function(charArray, lineCharCount, lineEndIndex){
     if (charArray[lineEndIndex] === " ") {
-      if ( this.singleTrailingWord(charArray, lineCharCount, lineEndIndex) ){
-        this.findBreakingSpace(charArray, lineCharCount, lineEndIndex - 1);
-      } else {
-        this.replaceWithBreak(charArray, lineEndIndex);
-        this.findNextLineEnd(charArray, lineCharCount, lineEndIndex + 1);
-      }
-    } else if (charArray[lineEndIndex] === "\n"){
-      //what if the whole line has no spaces and we step back to an old \n?
-      //do something else like splice in a hyphen?
+      this.handleFoundSpace(charArray, lineCharCount, lineEndIndex);
+    } else if(charArray[lineEndIndex] === "\n" || lineEndIndex === 0){
+      this.overflows.push(lineEndIndex + lineCharCount);
+      var backToEndIndex = lineEndIndex + lineCharCount
+      this.crawlFwdTilSpace(charArray, lineCharCount, backToEndIndex);
+    } else {
+      this.crawlBackTilSpace(charArray, lineCharCount, lineEndIndex - 1);
     }
     else {
       this.findBreakingSpace(charArray, lineCharCount, lineEndIndex - 1)
     }
   },
-  replaceWithBreak: function(charArray, givenIndex){
-    charArray[givenIndex] = "\n";
+  handleFoundSpace: function(charArray, lineCharCount, lineEndIndex){
+    if (this.singleTrailingWord(charArray, lineCharCount, lineEndIndex)){
+      this.crawlBackTilSpace(charArray, lineCharCount, lineEndIndex - 1);
+    } else {
+      this.replaceWithBreak(charArray, lineEndIndex);
+      this.findNextLineEnd(charArray, lineCharCount, lineEndIndex + 1);
+    }
   },
   singleTrailingWord: function(charArray, lineCharCount, lineEndIndex){
     var totalChars = charArray.length;
@@ -57,6 +60,9 @@ ParagraphFitter.prototype = {
       return finalWord
     }
     return finalLine && singleWord(finalChars);
+  },
+  replaceWithBreak: function(charArray, givenIndex){
+    charArray[givenIndex] = "\n";
   }
 }
 
