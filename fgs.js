@@ -15,25 +15,31 @@ ParagraphFitter.prototype = {
   insertBreaks: function(inputParagraph, desiredInchesWide){
     var charArray = inputParagraph.split("");
     var lineStartIndex = 0;
-    lineCharCount = this.determineLineCharCount(desiredInchesWide);
-    this.findLineEnd(charArray, lineCharCount, lineStartIndex);
+    var lineCharCount = desiredInchesWide / this.characterWidth;
+    this.findNextLineEnd(charArray, lineCharCount, lineStartIndex);
     this.splitParagraph = charArray.join("");
   },
-  findLineEnd:function(charArray, lineCharCount, lineStartIndex){
-    if (lineStartIndex + lineCharCount < charArray.length){
+  findNextLineEnd:function(charArray, lineCharCount, lineStartIndex){
+    var totalChars = charArray.length
+    if (lineStartIndex + lineCharCount < totalChars){
       lineEndIndex = lineStartIndex + lineCharCount - 1
-      this.findSpace(charArray, lineCharCount, lineEndIndex);
+      this.findBreakingSpace(charArray, lineCharCount, lineEndIndex);
     }
   },
-  findSpace: function(charArray, lineCharCount, lineEndIndex){
+  findBreakingSpace: function(charArray, lineCharCount, lineEndIndex){
     if (charArray[lineEndIndex] === " ") {
+      if ( this.singleTrailingWord(charArray, lineCharCount, lineEndIndex) ){
+        this.findNextLineEnd(charArray, lineCharCount, lineEndIndex + 1);
+      } else {
       this.replaceWithBreak(charArray, lineEndIndex);
-      this.findLineEnd(charArray, lineCharCount, lineEndIndex + 1);
+      this.findNextLineEnd(charArray, lineCharCount, lineEndIndex + 1);
+      }
     } else if (charArray[lineEndIndex] === "\n"){
+      //what if the whole line has no spaces and we step back to an old \n?
       //do something else like splice in a hyphen
     }
     else {
-      this.findSpace(charArray, lineCharCount, lineEndIndex - 1)
+      this.findBreakingSpace(charArray, lineCharCount, lineEndIndex - 1)
     }
   },
   replaceWithBreak: function(charArray, givenIndex){
