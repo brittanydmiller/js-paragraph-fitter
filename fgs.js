@@ -6,6 +6,24 @@ ParagraphFitter.prototype = {
   split: function(desiredInchesWide, inputParagraph){
     this.determineLineCharCount(desiredInchesWide);
     this.insertBreaks(inputParagraph); 
+  },
+  determineLineCharCount: function(desiredInchesWide){
+    this.lineCharCount = desiredInchesWide / this.characterWidth;
+  },
+  insertBreaks: function(inputParagraph){
+    var charArray = inputParagraph.split("");
+    var currentIndex = 0;
+    var lineEndIndex = currentIndex + this.lineCharCount - 1;
+    //iterate throught the entire charArray  
+    //findNaturalBreaks
+    //detectSpacesBackThroughTheLine
+    //replaceWithBreak
+    //reset curretnIndex & lineEndIndex
+    this.splitParagraph = charArray.join("");
+    console.log(this.splitParagraph)
+  },
+  replaceWithBreak: function(charArray, givenIndex){
+    charArray[givenIndex] = "\n";
   }
 }
 
