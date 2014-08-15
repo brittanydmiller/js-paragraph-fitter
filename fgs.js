@@ -5,53 +5,36 @@ function ParagraphFitter(view) {
 
 ParagraphFitter.prototype = {
   split: function(desiredInchesWide, inputParagraph){
-    this.determineLineCharCount(desiredInchesWide);
-    this.insertBreaks(inputParagraph); 
+    this.insertBreaks(inputParagraph, desiredInchesWide); 
     this.view.printColumn(desiredInchesWide, this.splitParagraph);
     this.view.reportMetrics();  
   },
   determineLineCharCount: function(desiredInchesWide){
-    this.lineCharCount = desiredInchesWide / this.characterWidth;
+    return lineCharCount = desiredInchesWide / this.characterWidth;
   },
-  insertBreaks: function(inputParagraph){
+  insertBreaks: function(inputParagraph, desiredInchesWide){
     var charArray = inputParagraph.split("");
-    var currentIndex = 0;
-    var lineEndIndex = currentIndex + this.lineCharCount - 1;
-    //iterate throught the entire charArray  
-    for (j = 0; j < charArray.length; j++){ 
-      console.log(charArray.length)
-      //findNaturalBreaks
-      if (charArray[lineEndIndex] == " ") {
-        this.replaceWithBreak(charArray, lineEndIndex);
-        currentIndex = lineEndIndex + 1;
-        lineEndIndex = currentIndex + this.lineCharCount - 1;
-      } else {
-        //detectSpacesBackThroughTheLine
-        var shrinkingEndIndex = lineEndIndex
-        var space_discovered = false;
-        for (i = 0; i < this.lineCharCount; i++){
-          shrinkingEndIndex = shrinkingEndIndex - 1
-          if (charArray[shrinkingEndIndex] == " ") {
-            this.replaceWithBreak(charArray, shrinkingEndIndex)
-            space_discovered = true;
-            console.log(charArray.join(""))
-            break;
-          }
-        }
-      //if you get all the way back to a previously replaced \n (i.e. no spaces in line)
-        // if (space_discovered == false) {
-        //   charArray.splice(lineEndIndex - 1, 0, "-");
-        //   currentIndex = lineEndIndex + 1;
-        //   lineEndIndex = currentIndex + this.lineCharCount - 1;
-        //   space_discovered = true;
-        // } else { 
-          currentIndex = lineEndIndex + 1;
-          lineEndIndex = currentIndex + this.lineCharCount - 1;
-        // }
-      }   
-    }
+    var lineStartIndex = 0;
+    lineCharCount = this.determineLineCharCount(desiredInchesWide);
+    this.findLineEnd(charArray, lineCharCount, lineStartIndex);
     this.splitParagraph = charArray.join("");
-    console.log(this.splitParagraph)
+  },
+  findLineEnd:function(charArray, lineCharCount, lineStartIndex){
+    if (lineStartIndex + lineCharCount < charArray.length){
+      lineEndIndex = lineStartIndex + lineCharCount - 1
+      this.findSpace(charArray, lineCharCount, lineEndIndex);
+    }
+  },
+  findSpace: function(charArray, lineCharCount, lineEndIndex){
+    if (charArray[lineEndIndex] === " ") {
+      this.replaceWithBreak(charArray, lineEndIndex);
+      this.findLineEnd(charArray, lineCharCount, lineEndIndex + 1);
+    } else if (charArray[lineEndIndex] === "\n"){
+      //do something else like splice in a hyphen
+    }
+    else {
+      this.findSpace(charArray, lineCharCount, lineEndIndex - 1)
+    }
   },
   replaceWithBreak: function(charArray, givenIndex){
     charArray[givenIndex] = "\n";
@@ -88,6 +71,6 @@ ParagraphFitterView.prototype = {
 window.onload = function(){
   var paragraphFitterView = new ParagraphFitterView();
   var paragraphFitter = new ParagraphFitter(paragraphFitterView);
-  //paragraphFitter.split(5, "In August 2013, Gunn posted on his Facebook page that Tyler Bates would be composing the film's score. Gunn stated that Bates would write some of the score first so that he can film to the music, as opposed to scoring to the film.[129] In February 2014, Gunn revealed that the film would incorporate songs from the 1970s and 1980s, such as 'Hooked on a Feeling', on a mixtape in Quill's Walkman, which acts as a way for him to stay connected to the Earth, home and family he lost.[130] In May 2014, Gunn added that using the songs from the 70s and 80s were 'cultural reference points', saying, 'It’s striking the balance throughout the whole movie, through something that is very unique, but also something that is easily accessible to people at the same time. The music and the Earth stuff is one of those touchstones that we have to remind us that, yeah, [Quill] is a real person from planet Earth who’s just like you and me. Except that he’s in this big outer space adventure.'[121]")
-  paragraphFitter.split(10, "The film's score and soundtrack, which features the songs from Quill's mixtape, and a deluxe edition featuring both albums, was released by Hollywood Records on July 29, 2014.[131] By August 2014, the soundtrack had reached the top of the Billboard 200 chart, becoming the first soundtrack album in history consisting entirely of previously released songs to top the chart.[132]")
+  paragraphFitter.split(5, "In August 2013, Gunn posted on his Facebook page that Tyler Bates would be composing the film's score. Gunn stated that Bates would write some of the score first so that he can film to the music, as opposed to scoring to the film.[129] In February 2014, Gunn revealed that the film would incorporate songs from the 1970s and 1980s, such as 'Hooked on a Feeling', on a mixtape in Quill's Walkman, which acts as a way for him to stay connected to the Earth, home and family he lost.[130] In May 2014, Gunn added that using the songs from the 70s and 80s were 'cultural reference points', saying, 'It’s striking the balance throughout the whole movie, through something that is very unique, but also something that is easily accessible to people at the same time. The music and the Earth stuff is one of those touchstones that we have to remind us that, yeah, [Quill] is a real person from planet Earth who’s just like you and me. Except that he’s in this big outer space adventure.'[121]")
+  //paragraphFitter.split(10, "The film's score and soundtrack, which features the songs from Quill's mixtape, and a deluxe edition featuring both albums, was released by Hollywood Records on July 29, 2014.[131] By August 2014, the soundtrack had reached the top of the Billboard 200 chart, becoming the first soundtrack album in history consisting entirely of previously released songs to top the chart.[132]")
 }
