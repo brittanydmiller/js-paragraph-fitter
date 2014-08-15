@@ -28,13 +28,17 @@ ParagraphFitter.prototype = {
   }
 }
 
-function ParagraphFitterView() {};
+function ParagraphFitterView() {
+  this.paragraphSelector = "container";
+  this.spanCharSelector = "char-example";
+  this.inchesSelector = "inches";
+};
 
 ParagraphFitterView.prototype = {
   printColumn: function(desiredInchesWide, fittedParagraph){
     console.log(fittedParagraph);
-    document.getElementById("inches").innerText = desiredInchesWide;
-    document.getElementById("container").innerText = fittedParagraph;
+    document.getElementById(this.inchesSelector).innerText = desiredInchesWide;
+    document.getElementById(this.paragraphSelector).innerText = fittedParagraph;
   }
 }
 
