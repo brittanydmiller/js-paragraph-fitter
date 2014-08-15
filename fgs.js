@@ -45,10 +45,10 @@ ParagraphFitter.prototype = {
   }
 }
 
-function ParagraphFitterView() {
-  this.paragraphSelector = "container";
-  this.spanCharSelector = "char-example";
-  this.inchesSelector = "inches";
+function ParagraphFitterView(selectors) {
+  this.paragraphSelector = selectors.paragraph;
+  this.spanCharSelector = selectors.spanChar;
+  this.inchesSelector = selectors.inches;
 };
 
 ParagraphFitterView.prototype = {
@@ -73,7 +73,8 @@ ParagraphFitterView.prototype = {
 }
 
 window.onload = function(){
-  var paragraphFitterView = new ParagraphFitterView();
+  var selectors = {paragraph:"container", spanChar:"char-example", inches:"inches"};
+  var paragraphFitterView = new ParagraphFitterView(selectors);
   var paragraphFitter = new ParagraphFitter(paragraphFitterView);
   var widthInInches = 10;
   var paragraphText = "The film's score and soundtrack, which features the songs from Quill's mixtape, and a deluxe edition featuring both albums, was released by Hollywood Records on July 29, 2014.[131] By August 2014, the soundtrack had reached the top of the Billboard 200 chart, becoming the first soundtrack album in history consisting entirely of previously released songs to top the chart.[132]";
