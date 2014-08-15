@@ -65,14 +65,13 @@ function ParagraphFitterView(selectors) {
 };
 
 ParagraphFitterView.prototype = {
-  
   printColumn: function(desiredInchesWide, fittedParagraph){
     console.log(fittedParagraph);
     document.getElementById(this.paragraphSelector).innerText = fittedParagraph;
   }, 
   reportMetrics: function(characterWidth, desiredInchesWide){
     var pixelsInAnInch = 96
-    var parPxWidth = this.selectParagraph.offsetWidth;
+    var parPxWidth = document.getElementById(this.paragraphSelector).offsetWidth;
     var charPxWidth = document.getElementById(this.spanCharSelector).offsetWidth;
     console.log("--------------------")
     console.log("Paragraph Pixel Width: " + parPxWidth);
