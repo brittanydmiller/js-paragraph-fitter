@@ -1,13 +1,14 @@
 function ParagraphFitter(view) {
   this.view = view
   this.characterWidth = 0.25;
+  this.overflows = [];
 };
 
 ParagraphFitter.prototype = {
   fitToWidth: function(desiredInchesWide, inputParagraph){
     this.insertBreaks(inputParagraph, desiredInchesWide); 
     this.view.printColumn(desiredInchesWide, this.splitParagraph);
-    this.view.reportMetrics(this.characterWidth, desiredInchesWide);  
+    this.view.reportMetrics(this.characterWidth, desiredInchesWide, this.overflows);  
     //handle input errors
   },
   insertBreaks: function(inputParagraph, desiredInchesWide){
@@ -69,18 +70,19 @@ ParagraphFitterView.prototype = {
     console.log(fittedParagraph);
     document.getElementById(this.paragraphSelector).innerText = fittedParagraph;
   }, 
-  reportMetrics: function(characterWidth, desiredInchesWide){
+  reportMetrics: function(characterWidth, desiredInchesWide, overflows){
     var pixelsInAnInch = 96
     var parPxWidth = document.getElementById(this.paragraphSelector).offsetWidth;
     var charPxWidth = document.getElementById(this.spanCharSelector).offsetWidth;
-    console.log("--------------------")
+    console.log("----------METRICS----------")
     console.log("Paragraph Pixel Width: " + parPxWidth);
     console.log("Character Pixel Width: " + charPxWidth);
-    console.log("Desired Character per Line: " + desiredInchesWide / characterWidth);
+    console.log("Desired Characters per Line: " + desiredInchesWide / characterWidth);
     //can't guarantee width if no line ever makes it to the longest length, due to needing to wrap.
-    console.log("Paragraph Pixel Width divided by Character Pixel Width (Actual number of characters per line): " + parPxWidth/charPxWidth);
+    console.log("Actual number of characters per longest line): " + parPxWidth/charPxWidth);
     console.log("Desired Paragraph Width (in inches): " + desiredInchesWide);
     console.log("Actual Paragraph Width (in inches): " + parPxWidth/pixelsInAnInch);
+    console.log("Overflows at character number(s): " + overflows);
   }
 }
 
