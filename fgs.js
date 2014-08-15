@@ -27,14 +27,14 @@ ParagraphFitter.prototype = {
   findBreakingSpace: function(charArray, lineCharCount, lineEndIndex){
     if (charArray[lineEndIndex] === " ") {
       if ( this.singleTrailingWord(charArray, lineCharCount, lineEndIndex) ){
-        this.findNextLineEnd(charArray, lineCharCount, lineEndIndex + 1);
+        this.findBreakingSpace(charArray, lineCharCount, lineEndIndex - 1);
       } else {
-      this.replaceWithBreak(charArray, lineEndIndex);
-      this.findNextLineEnd(charArray, lineCharCount, lineEndIndex + 1);
+        this.replaceWithBreak(charArray, lineEndIndex);
+        this.findNextLineEnd(charArray, lineCharCount, lineEndIndex + 1);
       }
     } else if (charArray[lineEndIndex] === "\n"){
       //what if the whole line has no spaces and we step back to an old \n?
-      //do something else like splice in a hyphen
+      //do something else like splice in a hyphen?
     }
     else {
       this.findBreakingSpace(charArray, lineCharCount, lineEndIndex - 1)
@@ -42,6 +42,20 @@ ParagraphFitter.prototype = {
   },
   replaceWithBreak: function(charArray, givenIndex){
     charArray[givenIndex] = "\n";
+  },
+  singleTrailingWord: function(charArray, lineCharCount, lineEndIndex){
+    var totalChars = charArray.length;
+    var finalLine = lineEndIndex + lineCharCount > totalChars;
+    var finalChars = charArray.slice(lineEndIndex + 1);
+    var singleWord = function(finalChars){
+      var finalWord = true;
+      for (var i = 0; i < finalChars.length; i++){
+        if (finalChars[i] == " ") { 
+          finalWord = false; }
+      }
+      return finalWord
+    }
+    return finalLine && singleWord(finalChars);
   }
 }
 
