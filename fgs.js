@@ -20,7 +20,7 @@ ParagraphFitter.prototype = {
   findNextLineEnd:function(charArray, lineCharCount, lineStartIndex){
     var totalChars = charArray.length
     if (lineStartIndex + lineCharCount < totalChars){
-      lineEndIndex = lineStartIndex + lineCharCount - 1
+      lineEndIndex = lineStartIndex + lineCharCount;
       this.findBreakingSpace(charArray, lineCharCount, lineEndIndex);
     }
   },
@@ -72,15 +72,17 @@ ParagraphFitterView.prototype = {
     document.getElementById(this.paragraphSelector).innerText = fittedParagraph;
   }, 
   reportMetrics: function(characterWidth, desiredInchesWide){
-    // var pixelsInAnInch = 96
+    var pixelsInAnInch = 96
     var parPxWidth = document.getElementById(this.paragraphSelector).offsetWidth;
     var charPxWidth = document.getElementById(this.spanCharSelector).offsetWidth;
     console.log("--------------------")
     console.log("Paragraph Pixel Width: " + parPxWidth);
     console.log("Character Pixel Width: " + charPxWidth);
-    console.log("Paragraph Pixel Width divided by Character Pixel Width (Number of characters per line): " + parPxWidth/charPxWidth);
-    // console.log("Desired Inches Wide: " + desiredInchesWide);
-    // console.log("Paragraph Inches Wide: " + parPxWidth/pixelsInAnInch);
+    //console.log("Desired Character per Line: " + desiredInchesWide / characterWidth);
+    //can't guarantee width if no line ever makes it to the longest length, due to needing to wrap.
+    console.log("Paragraph Pixel Width divided by Character Pixel Width (Actual number of characters per line): " + parPxWidth/charPxWidth);
+    console.log("Desired Paragraph Width (in inches): " + desiredInchesWide);
+    console.log("Actual Paragraph Width (in inches): " + parPxWidth/pixelsInAnInch);
   }
 }
 
