@@ -1,13 +1,13 @@
 function ParagraphFitter(view) {
   this.view = view
-  this.characterWidth = .25;
+  this.characterWidth = 0.25;
 };
 
 ParagraphFitter.prototype = {
   fitToWidth: function(desiredInchesWide, inputParagraph){
     this.insertBreaks(inputParagraph, desiredInchesWide); 
     this.view.printColumn(desiredInchesWide, this.splitParagraph);
-    this.view.reportMetrics(this.characterWidth);  
+    this.view.reportMetrics(this.characterWidth, desiredInchesWide);  
     //handle input errors
   },
   insertBreaks: function(inputParagraph, desiredInchesWide){
@@ -57,18 +57,16 @@ ParagraphFitterView.prototype = {
     document.getElementById(this.inchesSelector).innerText = desiredInchesWide;
     document.getElementById(this.paragraphSelector).innerText = fittedParagraph;
   }, 
-  reportMetrics: function(){
-    var pixelsInAnInch = 96
+  reportMetrics: function(characterWidth, desiredInchesWide){
+    // var pixelsInAnInch = 96
     var parPxWidth = document.getElementById(this.paragraphSelector).offsetWidth;
     var charPxWidth = document.getElementById(this.spanCharSelector).offsetWidth;
     console.log("--------------------")
     console.log("Paragraph Pixel Width: " + parPxWidth);
     console.log("Character Pixel Width: " + charPxWidth);
-    console.log(charPxWidth + " * 4 = " + parPxWidth);
-    console.log("--------------------")
-    console.log("Paragraph width in inches: " + parPxWidth / pixelsInAnInch);
-    console.log("Character width in inches: " + charPxWidth / pixelsInAnInch);
-    console.log(charPxWidth / pixelsInAnInch + " * 4 = " + parPxWidth / pixelsInAnInch);
+    console.log("Paragraph Pixel Width divided by Character Pixel Width (Number of characters per line): " + parPxWidth/charPxWidth);
+    // console.log("Desired Inches Wide: " + desiredInchesWide);
+    // console.log("Paragraph Inches Wide: " + parPxWidth/pixelsInAnInch);
   }
 }
 
