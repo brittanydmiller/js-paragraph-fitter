@@ -39,6 +39,19 @@ ParagraphFitterView.prototype = {
     console.log(fittedParagraph);
     document.getElementById(this.inchesSelector).innerText = desiredInchesWide;
     document.getElementById(this.paragraphSelector).innerText = fittedParagraph;
+  }, 
+  reportMetrics: function(){
+    var pixelsInAnInch = 96
+    var parPxWidth = document.getElementById(this.paragraphSelector).offsetWidth;
+    var charPxWidth = document.getElementById(this.spanCharSelector).offsetWidth;
+    console.log("--------------------")
+    console.log("Paragraph Pixel Width: " + parPxWidth);
+    console.log("Character Pixel Width: " + charPxWidth);
+    console.log(charPxWidth + " * 4 = " + parPxWidth);
+    console.log("--------------------")
+    console.log("Paragraph width in inches: " + parPxWidth / pixelsInAnInch);
+    console.log("Character width in inches: " + charPxWidth / pixelsInAnInch);
+    console.log(charPxWidth / pixelsInAnInch + " * 4 = " + parPxWidth / pixelsInAnInch);
   }
 }
 
