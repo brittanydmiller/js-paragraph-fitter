@@ -25,7 +25,6 @@ describe("ParagraphFitter", function() {
     expectedCharCount = widthInInches / .25;
     paragraphFitter.fitToWidth(widthInInches, paragraphText);
     firstLine = paragraphFitter.splitParagraph.split("\n")[0];
-    console.log(firstLine);
     expect(firstLine.length).toEqual(expectedCharCount);
 
     widthInInches = 5;
