@@ -7,11 +7,17 @@ function ParagraphFitter(view) {
 
 ParagraphFitter.prototype = {
   fitToWidth: function(desiredInchesWide, inputParagraph){
+    this.handleExceptions(desiredInchesWide, inputParagraph);
     this.insertBreaks(inputParagraph, desiredInchesWide); 
     //this.view.printColumn(desiredInchesWide, this.splitParagraph);
-    //this.view.reportMetrics(this.characterWidth, desiredInchesWide, this.overflows);  
-    //throw new Error("invalid number");
-    //handle input errors  
+    //this.view.reportMetrics(this.characterWidth, desiredInchesWide, this.overflows);   
+  },
+  handleExceptions: function(desiredInchesWide, inputParagraph){
+    if ( typeof(desiredInchesWide) !== "number"){
+      throw new Error("invalid number for paragraph width");
+    } else if ( typeof(inputParagraph) !== "string"){
+      throw new Error("invalid paragraph string");
+    }
   },
   insertBreaks: function(inputParagraph, desiredInchesWide){
     var charArray = inputParagraph.split("");
