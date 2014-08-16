@@ -7,6 +7,7 @@ function ParagraphFitter(view) {
 
 ParagraphFitter.prototype = {
   fitToWidth: function(desiredInchesWide, inputParagraph) {
+    var desiredInchesWide = desiredInchesWide;
     this.handleExceptions(desiredInchesWide, inputParagraph);
     this.insertBreaks(inputParagraph, desiredInchesWide); 
 

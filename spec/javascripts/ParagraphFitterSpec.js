@@ -208,4 +208,20 @@ describe("ParagraphFitter", function() {
       expect(paragraphFitter.overflows).toEqual([329]);
     });    
   });
+
+  describe ("Bigger picture tests for the overall program output", function() {
+    it("output should have no lines over the paragraph-width unless they have no spaces", function() {
+      widthInInches = 10;
+      paragraphFitter.fitToWidth(widthInInches, parLongStart);
+      expect(paragraphFitter.splitParagraph).toHaveNoOverflows;
+    });
+    
+    it("output should have more than one word on the final line, unless it is over the paragraph width", function() {
+      widthInInches = 10;
+      paragraphFitter.fitToWidth(widthInInches, parLongStart);
+      expect(paragraphFitter.splitParagraph).toLeaveNoWordBehind;
+    });
+  })
+
+
 });
