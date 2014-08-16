@@ -16,11 +16,11 @@ ParagraphFitterView.prototype = {
     console.log("Paragraph Pixel Width: " + parPxWidth);
     console.log("Character Pixel Width: " + charPxWidth);
     console.log("Desired Characters per Line: " + desiredInchesWide / characterWidth);
-    //can't guarantee width if no line ever makes it to the longest length, due to needing to wrap.
     console.log("Actual number of characters per longest line): " + parPxWidth/charPxWidth);
-    console.log("Desired Paragraph Width (in inches): " + desiredInchesWide);
-    console.log("Actual Paragraph Width (in inches): " + parPxWidth/pixelsInAnInch);
     console.log("Overflows at character number(s): " + overflows);
+    console.log("Desired Paragraph Width (in inches): " + desiredInchesWide);
+    console.log("Actual <p> Width (in inches): " + parPxWidth/pixelsInAnInch);
+    console.log("...may be larger due to overflow-lines stretching the containing paragraph\nor smaller in the random case that no line escapes early cropping.")
   }
 }
 
