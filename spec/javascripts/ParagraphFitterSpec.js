@@ -95,8 +95,6 @@ adventure.'[121]");
   it("tells the current song if the user has made it a favorite", function() {
     spyOn(song, 'persistFavoriteStatus');
 
-    player.play(song);
-    player.makeFavorite();
 
     expect(song.persistFavoriteStatus).toHaveBeenCalledWith(true);
   });
