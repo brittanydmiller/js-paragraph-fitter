@@ -68,15 +68,15 @@ ParagraphFitter.prototype = {
     var totalChars = charArray.length;
     var finalLine = lineEndIndex + lineCharCount > totalChars;
     var finalChars = charArray.slice(lineEndIndex + 1);
-    var singleWord = function(finalChars){
-      var finalWord = true;
-      for (var i = 0; i < finalChars.length; i++){
-        if (finalChars[i] == " ") { 
-          finalWord = false; }
-      }
-      return finalWord
+    return finalLine && this.singleWord(finalChars);
+  },
+  singleWord: function(arrayOfWords) {
+    var onlyOneWord = true;
+    for (var i = 0; i < arrayOfWords.length; i++){
+      if (arrayOfWords[i] == " ") { 
+        onlyOneWord = false; }
     }
-    return finalLine && singleWord(finalChars);
+    return onlyOneWord;
   },
   replaceWithBreak: function(charArray, givenIndex){
     charArray[givenIndex] = "\n";
