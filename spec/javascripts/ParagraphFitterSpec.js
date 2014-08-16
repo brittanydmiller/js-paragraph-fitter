@@ -48,68 +48,29 @@ describe("ParagraphFitter", function() {
     expect(paragraphFitter.splitParagraph).toEqual("The film's score and soundtrack, which\nfeatures the songs from Quill's mixtape,\nand a deluxe edition featuring both\nalbums, was released by Hollywood\nRecords on July 29, 2014.[131] By August\n2014, the soundtrack had reached the top\nof the Billboard 200 chart, becoming the\nfirst soundtrack\nalbuminhistoryconsistingentirelyofpreviouslyreleasedsongstotopthechart.[132]");
   });
 
-  it("should be able to do something cool", function() {
-    paragraphFitter.split(5, "In August 2013, Gunn posted on his Facebook page that Tyler Bates would be composing the film's score. Gunn stated that Bates would write some of the score first so that he can film to the music, as opposed to scoring to the film.[129] In February 2014, Gunn revealed that the film would incorporate songs from the 1970s and 1980s, such as 'Hooked on a Feeling', on a mixtape in Quill's Walkman, which acts as a way for him to stay connected to the Earth, home and family he lost.[130] In May 2014, Gunn added that using the songs from the 70s and 80s were 'cultural reference points', saying, 'It’s striking the balance throughout the whole movie, through something that is very unique, but also something that is easily accessible to people at the same time. The music and the Earth stuff is one of those touchstones that we have to remind us that, yeah, [Quill] is a real person from planet Earth who’s just like you and me. Except that he’s in this big outer space adventure.'[121]")
-    expect(paragraphFitterView.selectParagraph.innerText.toEqual("In August 2013,
-Gunn posted on his
-Facebook page that
-Tyler Bates would
-be composing the
-film's score. Gunn
-stated that Bates
-would write some of
-the score first so
-that he can film to
-the music, as
-opposed to scoring
-to the film.[129]
-In February 2014,
-Gunn revealed that
-the film would
-incorporate songs
-from the 1970s and
-1980s, such as
-'Hooked on a
-Feeling', on a
-mixtape in Quill's
-Walkman, which acts
-as a way for him to
-stay connected to
-the Earth, home and
-family he
-lost.[130] In May
-2014, Gunn added
-that using the
-songs from the 70s
-and 80s were
-'cultural reference
-points', saying,
-'It’s striking the
-balance throughout
-the whole movie,
-through something
-that is very
-unique, but also
-something that is
-easily accessible
-to people at the
-same time. The
-music and the Earth
-stuff is one of
-those touchstones
-that we have to
-remind us that,
-yeah, [Quill] is a
-real person from
-planet Earth who’s
-just like you and
-me. Except that
-he’s in this big
-outer space
-adventure.'[121]");
+  xit("[NOT A UNIT TEST?] should not have only one word after the final linebreak", function() {
 
-    //demonstrates use of custom matcher
-    expect(player).toBePlaying(song);
+  });
+
+  xit("[NOT A UNIT TEST?] should have no lines longer than paragraph-width unless they contain no spaces", function() {
+    
+  });
+
+  describe("errors", function() {
+    var paragraphText = "The film's score and soundtrack, which features the songs from Quill's mixtape, and a deluxe edition featuring both albums, was released by Hollywood Records on July 29, 2014.[131] By August 2014, the soundtrack had reached the top of the Billboard 200 chart, becoming the first soundtrack albuminhistoryconsistingentirelyofpreviouslyreleasedsongstotopthechart.[132]"
+
+    it("should throw an exception if given a non-positive-integer for paragraph-width when called", function(){
+      expect(function() {
+        paragraphFitter.fitToWidth("x", paragraphText)
+      }).toThrowError("invalid number for paragraph width");
+    });
+
+    it("should throw an exception if given a non-string for paragraph text when called", function() {
+      expect(function() {
+        paragraphFitter.fitToWidth(widthInInches, 5)
+      }).toThrowError("invalid paragraph string");
+    });
+
   });
 
   describe("when song has been paused", function() {
@@ -118,17 +79,12 @@ adventure.'[121]");
       player.pause();
     });
 
-    it("should indicate that the song is currently paused", function() {
-      expect(player.isPlaying).toBeFalsy();
+  });
 
       // demonstrates use of 'not' with a custom matcher
       expect(player).not.toBePlaying(song);
     });
 
-    it("should be possible to resume", function() {
-      player.resume();
-      expect(player.isPlaying).toBeTruthy();
-      expect(player.currentlyPlayingSong).toEqual(song);
     });
   });
 
