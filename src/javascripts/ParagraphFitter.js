@@ -12,7 +12,7 @@ ParagraphFitter.prototype = {
     this.insertBreaks(inputParagraph, desiredInchesWide); 
 
     //the following two view function calls must be disabled if you wish to run Jasmine tests in the browser.
-    //(see ParagraphFitterView.js for more details)
+    //(see ParagraphFitterViewSpec.js or the readme for more details)
 
     this.view.printColumn(desiredInchesWide, this.splitParagraph);
     this.view.reportMetrics(this.characterWidth, desiredInchesWide, this.overflows);   
