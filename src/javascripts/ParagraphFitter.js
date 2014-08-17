@@ -35,61 +35,42 @@ ParagraphFitter.prototype = {
     var runningLineLength = this.wordArray[lineStartIndex].length;
     var currentIndex = lineStartIndex;
     while (this.beforeParEnd(currentIndex) && this.hypotheticallyBelowLineLimit(runningLineLength, currentIndex)) {   
-      console.log("allowed in: " + currentIndex)
       runningLineLength = this.addOneWord(runningLineLength, currentIndex);
       currentIndex++;
     } 
     this.handleFoundSpace(currentIndex)
   },
   beforeParEnd: function(currentIndex) {
-    return currentIndex < this.wordArray.length - 1;
+    return currentIndex <= this.wordArray.length - 1;
   },
   hypotheticallyBelowLineLimit: function(runningLineLength, currentIndex) {
     return this.addOneWord(runningLineLength, currentIndex) <= this.lineCharCount;
   },
   addOneWord: function(runningLineLength, currentIndex){
     if (this.wordArray[currentIndex + 1] == null) {
-    console.log(this.wordArray + "|" + runningLineLength + "|" + currentIndex + "|" + this.wordArray[currentIndex] + "|" + this.wordArray.length);
     } else {
       return runningLineLength + 1 + this.wordArray[currentIndex + 1].length;
     } 
   },
-  // crawlBackTilSpace: function(this.wordArray, lineCharCount, lineEndIndex) {
-  //   if (this.wordArray[lineEndIndex] === " ") {
-  //     this.handleFoundSpace(this.wordArray, lineCharCount, lineEndIndex);
-  //   } else if(this.wordArray[lineEndIndex] === "\n" || lineEndIndex === 0) {
-  //     this.overflows.push(lineEndIndex + lineCharCount);
-  //     var backToEndIndex = lineEndIndex + lineCharCount
-  //     this.crawlFwdTilSpace(this.wordArray, lineCharCount, backToEndIndex);
-  //   } else {
-  //     this.crawlBackTilSpace(this.wordArray, lineCharCount, lineEndIndex - 1);
-  //   }
-  // },
-  // crawlFwdTilSpace: function(this.wordArray, lineCharCount, lineEndIndex) {
-  //   var totalChars = this.wordArray.length;
-  //   var finalLine = lineEndIndex + lineCharCount > totalChars;
-  //   if (finalLine) {
-  //     return;    
-  //   } else if (this.wordArray[lineEndIndex] === " ") {
-  //     this.breakAndKeepLooking(this.wordArray, lineCharCount, lineEndIndex);
-  //   } else {
-  //     this.crawlFwdTilSpace(this.wordArray, lineCharCount, lineEndIndex + 1);
-  //   }
-  // },
-  breakAndKeepLooking: function(lineEndIndex){
-    this.replaceWithBreak(lineEndIndex);
-    this.findNextLineEnd(lineEndIndex + 1);
-  },
   handleFoundSpace: function(currentIndex) {
-    if (this.singleTrailingWord(currentIndex)) {   
-      //this.breakAndKeepLooking(currentIndex - 1);
+    if (this.singleTrailingWord(currentIndex)) {  
+      this.removeBreakFromPrevWord(currentIndex - 1);
+      this.replaceWithBreak(currentIndex - 2);
+    } else if (this.wordArray[currentIndex + 1] == null) {
+      return;
     } else {
       this.breakAndKeepLooking(currentIndex);
     }
   },
   singleTrailingWord: function(currentIndex) {
-    return (this.wordArray[currentIndex + 1] == null);
-    //not enough here
+    return currentIndex == this.wordArray.length - 1;
+  },
+  removeBreakFromPrevWord: function(currentIndex) {
+    this.wordArray[currentIndex] = this.wordArray[currentIndex].slice(0, -1)
+  },
+  breakAndKeepLooking: function(currentIndex){
+    this.replaceWithBreak(currentIndex);
+    this.findNextLineEnd(currentIndex + 1);
   },
   replaceWithBreak: function(givenIndex) {
     this.wordArray[givenIndex] = this.wordArray[givenIndex] + "\n";

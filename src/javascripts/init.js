@@ -8,10 +8,10 @@ window.onload = function(){
   var widthInInches = 7;
 
   // // Long line to start:
-  // var paragraphText = "Thefilm'sscoreandsoundtrack,whichfeaturesthesongsfromQuill'smixtape,andadeluxeedition featuring both albums, was released by Hollywood Records on July 29, 2014.[131] By August 2014, the soundtrack had reached the top of the Billboard 200 chart, becoming the first soundtrack album in history consisting entirely of previously released songs to top the chart.[132]";
+  var paragraphText = "Thefilm'sscoreandsoundtrack,whichfeaturesthesongsfromQuill'smixtape,andadeluxeedition featuring both albums, was released by Hollywood Records on July 29, 2014.[131] By August 2014, the soundtrack had reached the top of the Billboard 200 chart, becoming the first soundtrack album in history consisting entirely of previously released songs to top the chart.[132]";
   
   // // When width = 7 this one will show the "leave no single word behind" feature.
-   var paragraphText = "The film's score and soundtrack, which features the songs from Quill's mixtape, and a deluxe edition featuring both albums, was released by Hollywood Records on July 29, 2014.[131] By August 2014, the soundtrack had reached the top of the Billboard 200 chart, becoming the first soundtrack album in history consisting entirely of released songs to top the chart.";
+  // var paragraphText = "The film's score and soundtrack, which features the songs from Quill's mixtape, and a deluxe edition featuring both albums, was released by Hollywood Records on July 29, 2014.[131] By August 2014, the soundtrack had reached the top of the Billboard 200 chart, becoming the first soundtrack album in history consisting entirely of released songs to top the chart.";
   
   // // Long line at end:
   // var paragraphText = "The film's score and soundtrack, which features the songs from Quill's mixtape, and a deluxe edition featuring both albums, was released by Hollywood Records on July 29, 2014.[131] By August 2014, the soundtrack had reached the top of the Billboard 200 chart, becoming the first soundtrack album in historyconsistingentirelyofpreviouslyreleasedsongstotopthechart.";
