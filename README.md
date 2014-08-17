@@ -42,7 +42,7 @@ A stackoverflow suggested getting the offsetWidths of the span and the paragraph
 
 ###instructions for viewing in the DOM/Console
 ------
-(it is also online at [brittanydmiller.com/FGS/src](brittanydmiller.com/FGS/src) but you won't be able to mess with the inputs)
+(it is also online at [brittanydmiller.com/FGS/src](http://brittanydmiller.com/FGS/src) but you won't be able to mess with the inputs)
 
 1. Make sure init.js is NOT commented (by default this is taken care of).
 2. Make sure lines 17 & 18 in ParagraphFitter.js are NOT commented (by default this is taken care of).
