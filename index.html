@@ -8,22 +8,47 @@
   <link href='http://fonts.googleapis.com/css?family=Rozha+One' rel='stylesheet' type='text/css'>
 </head>
 <body>
-  <header class="content">
+  <header class="container">
+    <div class="content">
     <h1>Ding. | <span id="tagline">a manual paragraph wrapper</span></h1>
     <p id="description">
-      A paragraph fitter in JavaScript that can make your paragraph any width with custom line breaks! Very exciting. With special consideration for making sure your last line always has more than one word in it, and logging any possible overflows caused by really long words or really short paragraph-widths.
-      input: single string of paragraph text, given width of inches for resulting paragraph
-      output: string w/ line breaks
+      Ding uses JavaScript to make your paragraph any width with custom line breaks! Very exciting. Ding also ensures your final line always has at least two words in it, and logs any possible overflows caused by really long words or really short paragraph-widths.
+      
+      Notes: Paragraph will be using a mono-spaced font at a character-width of .25 inches. (This was a challenge given to me -- I don't purport to claim Ding is a useful app.)
     </p>
+    </div>
   </header>
-  <div class="content" id="input">
-    <form>
-      <input>Enter your text here</input>
-    </form>
+  <div class="container" id="input">
+    <div class="content">
+      <h2>Inputs:</h2>
+      <form>
+        <ul>
+          <label>final width you'd like your paragraph to be (in inches)</label>
+          <li><input type="number" placeholder="6" min="1" max="11" value = "6.5" step=".1"></input></li>
+          <label>your paragraph text</label>
+          <li><textarea type="text-area" rows="10" cols="70" placeholder="The film's score and soundtrack, which features the songs from Quill's mixtape, and a deluxe edition featuring both albums, was released by Hollywood Records on July 29, 2014.[131] By August 2014, the soundtrack had reached the top of the Billboard 200 chart, becoming the first soundtrack album in history consisting entirely of released songs to top the chart.">The film's score and soundtrack, which features the songs from Quill's mixtape, and a deluxe edition featuring both albums, was released by Hollywood Records on July 29, 2014.[131] By August 2014, the soundtrack had reached the top of the Billboard 200 chart, becoming the first soundtrack album in history consisting entirely of released songs to top the chart.</textarea></li>
+          <li><input type="submit" value="Ding Me!"></li>
+      </ul>
+      </form>
+    </div>
   </div>
-  <div class="content">  
-    <p id="output"></p>
-    <p><span id="char-example">I</span></p>
+  <div class="container"> 
+    <div class="content"> 
+      <h2>Output:</h2>
+      <p></p>
+      <p id="output"></p>
+      <p><span id="char-example">I</span></p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="content"> 
+      <p id="metrics"></p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="content"> 
+      <p id="notes"></p>
+    </div>
   </div>
   <script type="text/javascript" src="src/javascripts/ParagraphFitterView.js"></script>
   <script type="text/javascript" src="src/javascripts/ParagraphFitter.js"></script>
