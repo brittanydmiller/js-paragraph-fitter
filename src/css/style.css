@@ -1,18 +1,51 @@
 body {
-  font-family: "Courier New", Courier, monospace;
-  font-size: 40.3px;
   margin: 0;
   padding: 0;
+  background-image: url('typewriter-bg.jpg');
+  color: #FFF;
   }
 
-#container {
+.container {
+  margin-top: 10em;
+}
+
+.content {
+  max-width: 1000px;
+  padding: 70px 0px 70px 0px;
+  margin: 0 auto;
+}
+
+header{
+  text-align: center;
+  height: 20em;
+  background-color: black;
+}
+
+h1 {
+  font-family: 'Rozha One', serif;
+  font-size: 3em;
+  color: #FFF;
+}
+
+li {
+  list-style: none;
+}
+
+span#tagline {
+  font-size: .5em;
+  color: #FF3333;
+}
+
+#output {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 40.3px;
   display: inline-block;
   background-color: #AFEEEE;
   padding: 0;
   margin: 0;
 }
 
-span {
+#char-example {
   padding: 0;
   margin: 0;
   background-color: #FFBB33;
