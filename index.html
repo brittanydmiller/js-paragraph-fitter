@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8;" />
+  <meta name="viewport" content="initial-scale=1">
+  <title>Paragraph Width Wrapper</title>
+  <link rel="stylesheet" type="text/css" href="src/css/style.css" />
+  <link href='http://fonts.googleapis.com/css?family=Rozha+One' rel='stylesheet' type='text/css'>
+</head>
+<body>
+  <header class="content">
+    <h1>Ding. | <span id="tagline">a manual paragraph wrapper</span></h1>
+    <p id="description">
+      A paragraph fitter in JavaScript that can make your paragraph any width with custom line breaks! Very exciting. With special consideration for making sure your last line always has more than one word in it, and logging any possible overflows caused by really long words or really short paragraph-widths.
+      input: single string of paragraph text, given width of inches for resulting paragraph
+      output: string w/ line breaks
+    </p>
+  </header>
+  <div class="content" id="input">
+    <form>
+      <input>Enter your text here</input>
+    </form>
+  </div>
+  <div class="content">  
+    <p id="output"></p>
+    <p><span id="char-example">I</span></p>
+  </div>
+  <script type="text/javascript" src="src/javascripts/ParagraphFitterView.js"></script>
+  <script type="text/javascript" src="src/javascripts/ParagraphFitter.js"></script>
+  <script type="text/javascript" src="src/javascripts/init.js"></script>
+  <script type="text/javascript" href="http://cdnjs.cloudflare.com/ajax/libs/skrollr/0.6.26/skrollr.min.js"></script>
+</body>
