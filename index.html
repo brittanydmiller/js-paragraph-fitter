@@ -13,19 +13,19 @@
       <h1>Ding\n | <span id="tagline">a manual line wrapper</span></h1>
       <ul id="links"> 
         <li><a  href="https://github.com/brittanydmiller/js-paragraph-fitter">Github</a></li>
-        <li><a href="">About</a></li>
+        <li><a id="about" href="javascript:;" onclick="showAbout();" >About</a></li>
       </ul>
     </div>
   </header>
-  <div class="container hideable">
-    <div class="content" id="description">
+  <div class="container hideable" id="description">
+    <div class="content">
       <p>
         Ding\n wraps your lines by inserting custom line breaks at just the right spots!
       </p>
       <ul>
         <li>Vanilla JavaScript</li>
         <li>No lonely final words -- Ding\n makes sure everyone has a buddy.</li>
-        <li>Overflows are logged and reported below (due to long words / short line lengths)</li> 
+        <li>Overflows are logged below (due to long words / short line lengths)</li> 
         <li>Characters are 24px wide, monospaced</li>
       </ul>
       <p>
@@ -50,11 +50,10 @@
   <div class="container hideable output-box"> 
     <div class="content output-content"> 
       <h2>Output:</h2>
-      <p></p>
+      <p><a href="">{ Reset }</a><p>
       <p id="output"></p>
       <p><span id="char-example">I</span></p>
-      <p><a href="">Reset</a><p>
-    </div>
+          </div>
   </div>
   <div class="container hideable metrics-box">
     <div class="content"> 
@@ -63,6 +62,8 @@
       </ul>
       <h3>How are metrics calculated?</h3>
       <ul>
+        <li>Set the output paragraph to width: 100%, display: inline-block</li>
+        <li>The output paragraph stretches to the width of its contents</li>
         <li>Read the DOM to find the offsetWidth of the output paragraph</li>
         <li>Read the offsetWidth of a single character hidden offscreen</li>
         <li><a href="https://github.com/brittanydmiller/js-paragraph-fitter">Check out the code on Github</a></li>
