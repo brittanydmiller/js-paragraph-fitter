@@ -3,16 +3,12 @@ body {
   padding: 0;
   background-image: url('typewriter-bg.jpg');
   color: #FFF;
-  font-family: Arial;
   line-height: 1.5em;
   }
 
-.container {
-  margin-top: 3em;
-}
-
 .content {
   max-width: 1000px;
+  width: 40%;
   padding: 10px 0px 30px 0px;
   margin: 0 auto;
 }
@@ -23,6 +19,7 @@ body {
 
 header{
   background-color: black;
+  margin-top: 3em;
 }
 
 h1 {
@@ -34,7 +31,7 @@ h1 {
 
 header p, header ul {
   width: 50em;
-  margin: 0 auto;
+  margin: 1em auto;
 }
 
 #links {
@@ -44,7 +41,6 @@ header p, header ul {
 
 a {
   text-decoration: none;
-  font-weight: bold;
   color: #0BBBFB;
 }
 
@@ -53,12 +49,9 @@ a {
   padding: 0 3em;
 }
 
-
-
 li {
   list-style: none;
 }
-
 
 span#tagline {
   font-size: .5em;
