@@ -17,7 +17,7 @@ body {
   margin: 0 auto;
 }
 
-.hidable {
+.hideable {
   display:none;
 }
 
@@ -75,10 +75,16 @@ span#tagline {
   line-height: initial;
 }
 
-.output-class {
-  background-color: #0BBBFB;
+.output-box {
+  background-color: rgba(11,187,251,.95);
 }
-
+.output-content {
+  width: 100%;
+}
+.output-content a {
+  color: #FFF;
+}
+  
 #char-example {
   font-family: "Courier New", Courier, monospace;
   font-size: 40.3px;
@@ -90,5 +96,12 @@ span#tagline {
 }
 
 .metrics-box {
-  background-color: black;
+  background-color: rgba(0,0,0,0.5);
+}
+
+footer {
+  background: black;
+  text-align: center;
+  margin-bottom: 0;
+  font-size: .8em;
 }

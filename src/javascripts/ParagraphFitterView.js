@@ -2,7 +2,8 @@ function ParagraphFitterView(selectors) {
   this.outputSelector = selectors.output;
   this.spanCharSelector = selectors.spanChar;
   this.metricsSelector = selectors.metrics;
-  this.hiddenSelector = selectors.hidable;
+  this.hiddenSelector = selectors.hideable;
+  this.inputSelector = selectors.userInput;
 };
 
 ParagraphFitterView.prototype = {

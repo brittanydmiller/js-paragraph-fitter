@@ -17,7 +17,7 @@
       </ul>
     </div>
   </header>
-  <div class="container">
+  <div class="container hideable">
     <div class="content" id="description">
       <p>
         Ding\n wraps your lines by inserting custom line breaks at just the right spots!
@@ -33,7 +33,7 @@
       </p>
 
   </div>
-  <div class="container" id="input">
+  <div class="container" id="user-input">
     <div class="content">
       <h2>Inputs:</h2>
       <form onsubmit="captureForm()">
@@ -47,15 +47,15 @@
       </form>
     </div>
   </div>
-  <div class="container hidable output-class"> 
-    <div class="content"> 
+  <div class="container hideable output-box"> 
+    <div class="content output-content"> 
       <h2>Output:</h2>
       <p></p>
       <p id="output"></p>
       <p><span id="char-example">I</span></p>
     </div>
   </div>
-  <div class="container hidable metrics-box">
+  <div class="container hideable metrics-box">
     <div class="content"> 
       <h2>Metrics:</h2>
       <ul id="metrics">
@@ -64,6 +64,11 @@
       <h4><a  href="https://github.com/brittanydmiller/js-paragraph-fitter">Check out the code on Github</a></h4>
     </div>
   </div>
+  <footer class="container hideable">
+    <div class="content"> 
+      <p>&copy; Copyright 2014 Brittany Miller</p>
+    </div>
+  </footer>
   <script type="text/javascript" src="src/javascripts/ParagraphFitterView.js"></script>
   <script type="text/javascript" src="src/javascripts/ParagraphFitter.js"></script>
   <script type="text/javascript" src="src/javascripts/init.js"></script>

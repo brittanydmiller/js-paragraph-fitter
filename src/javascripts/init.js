@@ -3,13 +3,14 @@
 
 window.onload = function(){
   var s = skrollr.init();
+
 }
   
 function captureForm(){
   if (event.preventDefault) {event.preventDefault();}
   var widthInPixels = parseInt(event.target[0].value);
   var paragraphText = event.target[1].value;
-  var selectors = {output:"output", spanChar:"char-example", metrics:"metrics", hidable:"hidable"};
+  var selectors = {output:"output", spanChar:"char-example", metrics:"metrics", hideable:"hideable", userInput: "user-input"};
   var paragraphFitterView = new ParagraphFitterView(selectors);
   var paragraphFitter = new ParagraphFitter(paragraphFitterView);
   paragraphFitter.fitToWidth(widthInPixels, paragraphText);
