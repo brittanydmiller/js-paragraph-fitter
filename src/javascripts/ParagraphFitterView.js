@@ -2,18 +2,26 @@ function ParagraphFitterView(selectors) {
   this.outputSelector = selectors.output;
   this.spanCharSelector = selectors.spanChar;
   this.metricsSelector = selectors.metrics;
-  this.hiddenSelector = selectors.hidable;
+  this.hiddenSelector = selectors.hideable;
+  this.inputSelector = selectors.userInput;
 };
 
 ParagraphFitterView.prototype = {
   outputResults: function(desiredPixelsWide, fittedParagraph, characterWidth, overflows){
     this.printColumn(desiredPixelsWide, fittedParagraph);
-    this.reportMetrics(characterWidth, desiredPixelsWide, overflows);
     this.toggleVisibility();
+    this.reportMetrics(characterWidth, desiredPixelsWide, overflows);
   },
   printColumn: function(desiredPixelsWide, fittedParagraph){
     document.getElementById(this.outputSelector).innerText = fittedParagraph;
   }, 
+  toggleVisibility: function() {
+    var hiddens = document.getElementsByClassName(this.hiddenSelector);
+    for (i = 0; i < hiddens.length; i++) {
+      hiddens[i].style.display = 'block';
+    }
+    document.getElementById(this.inputSelector).style.display = 'none';
+  },
   reportMetrics: function(characterWidth, desiredPixelsWide, overflows) {
     var parPxWidth = document.getElementById(this.outputSelector).offsetWidth;
     var charPxWidth = document.getElementById(this.spanCharSelector).offsetWidth;
@@ -24,8 +32,8 @@ ParagraphFitterView.prototype = {
       "Actual number of characters per longest line: ": parPxWidth / charPxWidth,
       "Overflows at character number(s): ": overflows,
       "Desired Paragraph Width: ": desiredPixelsWide,
-      "Actual Paragraph Width: ": parPxWidth,
-      "...may be larger due to overflow-lines stretching the containing paragraph, ": "or smaller in the random case that no line escapes early cropping due to the fall of natural breaks."
+      "Actual Paragraph Width*: ": parPxWidth,
+      "*May be larger due to overflow-lines stretching the containing paragraph, ": "or smaller if no natural breaks fall after a 100% full line."
     }
     for (i in metricsData) {
       metricsOutput += "<li>";
@@ -34,12 +42,6 @@ ParagraphFitterView.prototype = {
       metricsOutput += "</li>";
     }
     document.getElementById(this.metricsSelector).innerHTML = metricsOutput;   
-  },
-  toggleVisibility: function() {
-    var hiddens = document.getElementsByClassName(this.hiddenSelector);
-    for (i = 0; i < hiddens.length; i++) {
-      hiddens[i].style.display = 'block';
-    }
   }
 }
 

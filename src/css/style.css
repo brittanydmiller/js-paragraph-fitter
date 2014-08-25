@@ -3,26 +3,23 @@ body {
   padding: 0;
   background-image: url('typewriter-bg.jpg');
   color: #FFF;
-  font-family: Arial;
   line-height: 1.5em;
   }
 
-.container {
-  margin-top: 3em;
-}
-
 .content {
   max-width: 1000px;
+  width: 40%;
   padding: 10px 0px 30px 0px;
   margin: 0 auto;
 }
 
-.hidable {
+.hideable {
   display:none;
 }
 
 header{
   background-color: black;
+  margin-top: 3em;
 }
 
 h1 {
@@ -32,20 +29,24 @@ h1 {
   color: #FFF;
 }
 
-header p {
+header p, header ul {
   width: 50em;
-  margin: 0 auto;
+  margin: 1em auto;
 }
 
-#github {
+#links {
   text-align: center;
   margin-top: 1em;
 }
 
 a {
   text-decoration: none;
-  font-weight: bold;
   color: #0BBBFB;
+}
+
+#links li {
+  float:left;
+  padding: 0 3em;
 }
 
 li {
@@ -61,13 +62,22 @@ span#tagline {
   font-family: "Courier New", Courier, monospace;
   font-size: 40.3px;
   display: inline-block;
-  background-color: #AFEEEE;
   color: #000;
   padding: 0;
   margin: 0;
   line-height: initial;
 }
 
+.output-box {
+  background-color: rgba(11,187,251,.95);
+}
+.output-content {
+  width: 100%;
+}
+.output-content a {
+  color: #FFF;
+}
+  
 #char-example {
   font-family: "Courier New", Courier, monospace;
   font-size: 40.3px;
@@ -76,4 +86,15 @@ span#tagline {
   background-color: #FFBB33;
   position: relative;
   left: -999px;
+}
+
+.metrics-box {
+  background-color: rgba(0,0,0,0.5);
+}
+
+footer {
+  background: black;
+  text-align: center;
+  margin-bottom: 0;
+  font-size: .8em;
 }

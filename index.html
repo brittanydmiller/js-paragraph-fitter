@@ -3,52 +3,77 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8;" />
   <meta name="viewport" content="initial-scale=1">
-  <title>Paragraph Width Wrapper</title>
+  <title>Ding Line Wrapper</title>
   <link rel="stylesheet" type="text/css" href="src/css/style.css" />
   <link href='http://fonts.googleapis.com/css?family=Rozha+One' rel='stylesheet' type='text/css'>
 </head>
 <body>
   <header class="container">
     <div class="content">
-    <h1>Ding. | <span id="tagline">a manual line wrapper</span></h1>
-    <p id="description">
-      Ding uses JavaScript to make your paragraph any width with custom line breaks! Very exciting. Ding also ensures your final line always has at least two words in it, and logs any possible overflows caused by really long words or really short paragraph-widths.
-      
-      Notes: Paragraph will be using a mono-spaced font at a character-width of 24 pixels. (This was a code challenge given to me -- I don't claim Ding as a useful app :)
-    </p>
-    <p id="github"> <a  href="https://github.com/brittanydmiller/js-paragraph-fitter">View the code on Github</a>
-    </p>
+      <h1>Ding\n | <span id="tagline">a manual line wrapper</span></h1>
+      <ul id="links"> 
+        <li><a  href="https://github.com/brittanydmiller/js-paragraph-fitter">Github</a></li>
+        <li><a href="">About</a></li>
+      </ul>
     </div>
   </header>
-  <div class="container" id="input">
+  <div class="container hideable">
+    <div class="content" id="description">
+      <p>
+        Ding\n wraps your lines by inserting custom line breaks at just the right spots!
+      </p>
+      <ul>
+        <li>Vanilla JavaScript</li>
+        <li>No lonely final words -- Ding\n makes sure everyone has a buddy.</li>
+        <li>Overflows are logged and reported below (due to long words / short line lengths)</li> 
+        <li>Characters are 24px wide, monospaced</li>
+      </ul>
+      <p>
+        (This was a code challenge -- I don't claim Ding\n as a useful app :)
+      </p>
+    </div>
+  </div>
+  <div class="container" id="user-input">
     <div class="content">
       <h2>Inputs:</h2>
       <form onsubmit="captureForm()">
         <ul>
-          <label>final width you'd like your paragraph to be (in pixels)</label>
+          <li><label>Max width for your paragraph (in pixels)</label></li>
           <li><input type="number" name="widthInPixels" placeholder="600" min="100" max="1152" value = "600" step="25"></input></li>
-          <label>your paragraph text</label>
+          <li><label>Paragraph text</label></li>
           <li><textarea type="text-area" name="paragraphText" rows="10" cols="70" placeholder="The film's score and soundtrack, which features the songs from Quill's mixtape, and a deluxe edition featuring both albums, was released by Hollywood Records on July 29, 2014.[131] By August 2014, the soundtrack had reached the top of the Billboard 200 chart, becoming the first soundtrack album in history consisting entirely of released songs to top the chart.">The film's score and soundtrack, which features the songs from Quill's mixtape, and a deluxe edition featuring both albums, was released by Hollywood Records on July 29, 2014.[131] By August 2014, the soundtrack had reached the top of the Billboard 200 chart, becoming the first soundtrack album in history consisting entirely of released songs to top the chart.</textarea></li>
-          <li><input type="submit" value="Ding Me!"></li>
+          <li><input type="submit" value="Ding!"></li>
       </ul>
       </form>
     </div>
   </div>
-  <div class="container hidable"> 
-    <div class="content"> 
+  <div class="container hideable output-box"> 
+    <div class="content output-content"> 
       <h2>Output:</h2>
       <p></p>
       <p id="output"></p>
       <p><span id="char-example">I</span></p>
+      <p><a href="">Reset</a><p>
     </div>
   </div>
-  <div class="container hidable">
+  <div class="container hideable metrics-box">
     <div class="content"> 
       <h2>Metrics:</h2>
       <ul id="metrics">
       </ul>
+      <h3>How are metrics calculated?</h3>
+      <ul>
+        <li>Read the DOM to find the offsetWidth of the output paragraph</li>
+        <li>Read the offsetWidth of a single character hidden offscreen</li>
+        <li><a href="https://github.com/brittanydmiller/js-paragraph-fitter">Check out the code on Github</a></li>
+      </ul>
     </div>
   </div>
+  <footer class="container hideable">
+    <div class="content"> 
+      <p>&copy; Copyright 2014 Brittany Miller</p>
+    </div>
+  </footer>
   <script type="text/javascript" src="src/javascripts/ParagraphFitterView.js"></script>
   <script type="text/javascript" src="src/javascripts/ParagraphFitter.js"></script>
   <script type="text/javascript" src="src/javascripts/init.js"></script>
