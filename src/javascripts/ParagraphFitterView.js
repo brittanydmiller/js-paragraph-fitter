@@ -1,26 +1,45 @@
 function ParagraphFitterView(selectors) {
-  this.paragraphSelector = selectors.paragraph;
+  this.outputSelector = selectors.output;
   this.spanCharSelector = selectors.spanChar;
+  this.metricsSelector = selectors.metrics;
+  this.hiddenSelector = selectors.hidable;
 };
 
 ParagraphFitterView.prototype = {
-  printColumn: function(desiredInchesWide, fittedParagraph){
-    console.log(fittedParagraph);
-    document.getElementById(this.paragraphSelector).innerText = fittedParagraph;
+  outputResults: function(desiredPixelsWide, fittedParagraph, characterWidth, overflows){
+    this.printColumn(desiredPixelsWide, fittedParagraph);
+    this.reportMetrics(characterWidth, desiredPixelsWide, overflows);
+    this.toggleVisibility();
+  },
+  printColumn: function(desiredPixelsWide, fittedParagraph){
+    document.getElementById(this.outputSelector).innerText = fittedParagraph;
   }, 
-  reportMetrics: function(characterWidth, desiredInchesWide, overflows){
-    var pixelsInAnInch = 96
-    var parPxWidth = document.getElementById(this.paragraphSelector).offsetWidth;
+  reportMetrics: function(characterWidth, desiredPixelsWide, overflows) {
+    var parPxWidth = document.getElementById(this.outputSelector).offsetWidth;
     var charPxWidth = document.getElementById(this.spanCharSelector).offsetWidth;
-    console.log("----------METRICS----------")
-    console.log("Paragraph Pixel Width: " + parPxWidth);
-    console.log("Character Pixel Width: " + charPxWidth);
-    console.log("Desired Characters per Line: " + desiredInchesWide / characterWidth);
-    console.log("Actual number of characters per longest line): " + parPxWidth/charPxWidth);
-    console.log("Overflows at character number(s): " + overflows);
-    console.log("Desired Paragraph Width (in inches): " + desiredInchesWide);
-    console.log("Actual <p> Width (in inches): " + parPxWidth/pixelsInAnInch);
-    console.log("...may be larger due to overflow-lines stretching the containing paragraph\nor smaller in the random case that no line escapes early cropping.")
+    var metricsOutput = "";
+
+    var metricsData = {
+      "Desired Characters per Line: ": desiredPixelsWide / characterWidth,
+      "Actual number of characters per longest line: ": parPxWidth / charPxWidth,
+      "Overflows at character number(s): ": overflows,
+      "Desired Paragraph Width: ": desiredPixelsWide,
+      "Actual Paragraph Width: ": parPxWidth,
+      "...may be larger due to overflow-lines stretching the containing paragraph, ": "or smaller in the random case that no line escapes early cropping due to the fall of natural breaks."
+    }
+    for (i in metricsData) {
+      metricsOutput += "<li>";
+      metricsOutput += i;
+      metricsOutput += metricsData[i];
+      metricsOutput += "</li>";
+    }
+    document.getElementById(this.metricsSelector).innerHTML = metricsOutput;   
+  },
+  toggleVisibility: function() {
+    var hiddens = document.getElementsByClassName(this.hiddenSelector);
+    for (i = 0; i < hiddens.length; i++) {
+      hiddens[i].style.display = 'block';
+    }
   }
 }
 
