@@ -31,8 +31,8 @@ ParagraphFitterView.prototype = {
       "Actual number of characters per longest line: ": parPxWidth / charPxWidth,
       "Overflows at character number(s): ": overflows,
       "Desired Paragraph Width: ": desiredPixelsWide,
-      "Actual Paragraph Width: ": parPxWidth,
-      "...may be larger due to overflow-lines stretching the containing paragraph, ": "or smaller in the random case that no line escapes early cropping due to the fall of natural breaks."
+      "Actual Paragraph Width*: ": parPxWidth,
+      "*May be larger due to overflow-lines stretching the containing paragraph, ": "or smaller if no natural breaks fall after a 100% full line."
     }
     for (i in metricsData) {
       metricsOutput += "<li>";
