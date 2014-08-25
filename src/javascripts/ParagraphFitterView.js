@@ -20,6 +20,7 @@ ParagraphFitterView.prototype = {
     for (i = 0; i < hiddens.length; i++) {
       hiddens[i].style.display = 'block';
     }
+    document.getElementById(this.inputSelector).style.display = 'none';
   },
   reportMetrics: function(characterWidth, desiredPixelsWide, overflows) {
     var parPxWidth = document.getElementById(this.outputSelector).offsetWidth;
