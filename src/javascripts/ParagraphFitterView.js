@@ -8,12 +8,18 @@ function ParagraphFitterView(selectors) {
 ParagraphFitterView.prototype = {
   outputResults: function(desiredPixelsWide, fittedParagraph, characterWidth, overflows){
     this.printColumn(desiredPixelsWide, fittedParagraph);
-    this.reportMetrics(characterWidth, desiredPixelsWide, overflows);
     this.toggleVisibility();
+    this.reportMetrics(characterWidth, desiredPixelsWide, overflows);
   },
   printColumn: function(desiredPixelsWide, fittedParagraph){
     document.getElementById(this.outputSelector).innerText = fittedParagraph;
   }, 
+  toggleVisibility: function() {
+    var hiddens = document.getElementsByClassName(this.hiddenSelector);
+    for (i = 0; i < hiddens.length; i++) {
+      hiddens[i].style.display = 'block';
+    }
+  },
   reportMetrics: function(characterWidth, desiredPixelsWide, overflows) {
     var parPxWidth = document.getElementById(this.outputSelector).offsetWidth;
     var charPxWidth = document.getElementById(this.spanCharSelector).offsetWidth;
@@ -34,12 +40,6 @@ ParagraphFitterView.prototype = {
       metricsOutput += "</li>";
     }
     document.getElementById(this.metricsSelector).innerHTML = metricsOutput;   
-  },
-  toggleVisibility: function() {
-    var hiddens = document.getElementsByClassName(this.hiddenSelector);
-    for (i = 0; i < hiddens.length; i++) {
-      hiddens[i].style.display = 'block';
-    }
   }
 }
 
