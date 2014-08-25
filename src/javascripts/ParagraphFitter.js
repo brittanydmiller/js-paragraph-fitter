@@ -1,33 +1,31 @@
 function ParagraphFitter(view) {
   this.view = view;
-  this.characterWidth = 0.25;
+  this.characterWidth = 24;
   this.overflows = [];
   this.splitParagraph = "";
 };
 
 ParagraphFitter.prototype = {
-  fitToWidth: function(desiredInchesWide, inputParagraph) {
-    var desiredInchesWide = desiredInchesWide;
-    this.handleExceptions(desiredInchesWide, inputParagraph);
-    this.insertBreaks(inputParagraph, desiredInchesWide); 
+  fitToWidth: function(desiredPixelsWide, inputParagraph) {
+    var desiredPixelsWide = desiredPixelsWide;
+    this.handleExceptions(desiredPixelsWide, inputParagraph);
+    this.insertBreaks(inputParagraph, desiredPixelsWide); 
 
     //the following two view function calls must be disabled if you wish to run Jasmine tests in the browser.
     //(see ParagraphFitterViewSpec.js or the readme for more details)
-
-    this.view.printColumn(desiredInchesWide, this.splitParagraph);
-    this.view.reportMetrics(this.characterWidth, desiredInchesWide, this.overflows);   
+    this.view.outputResults(desiredPixelsWide, this.splitParagraph, this.characterWidth, this.overflows);  
   },
-  handleExceptions: function(desiredInchesWide, inputParagraph) {
-    if ( typeof(desiredInchesWide) !== "number") {
+  handleExceptions: function(desiredPixelsWide, inputParagraph) {
+    if ( typeof(desiredPixelsWide) !== "number") {
       throw new Error("invalid number for paragraph width");
     } else if ( typeof(inputParagraph) !== "string") {
       throw new Error("invalid paragraph string");
     }
   },
-  insertBreaks: function(inputParagraph, desiredInchesWide) {
+  insertBreaks: function(inputParagraph, desiredPixelsWide) {
     var charArray = inputParagraph.split("");
     var lineStartIndex = 0;
-    var lineCharCount = desiredInchesWide / this.characterWidth;
+    var lineCharCount = Math.floor(desiredPixelsWide / this.characterWidth);
     this.findNextLineEnd(charArray, lineCharCount, lineStartIndex);
     this.splitParagraph = charArray.join("");
   },

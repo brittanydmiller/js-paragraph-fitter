@@ -4,9 +4,13 @@ function ParagraphFitterView(selectors) {
 };
 
 ParagraphFitterView.prototype = {
-  printColumn: function(desiredInchesWide, fittedParagraph){
-    console.log(fittedParagraph);
-    document.getElementById(this.paragraphSelector).innerText = fittedParagraph;
+  outputResults: function(desiredPixelsWide, fittedParagraph, characterWidth, overflows){
+    this.printColumn(desiredPixelsWide, fittedParagraph);
+    this.reportMetrics(characterWidth, desiredPixelsWide, overflows);
+    this.toggleVisibility();
+  },
+  printColumn: function(desiredPixelsWide, fittedParagraph){
+    document.getElementById(this.outputSelector).innerText = fittedParagraph;
   }, 
   reportMetrics: function(characterWidth, desiredInchesWide, overflows){
     var pixelsInAnInch = 96
